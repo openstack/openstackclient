@@ -1,7 +1,7 @@
 # The order of packages is significant, because pip processes them in the order
 # of appearance. Changing the order has an impact on the overall integration
 # process, which may cause wedges in the gate later.
-pbr>=1.8 # Apache-2.0
+pbr!=2.1.0,>=2.0.0 # Apache-2.0
 aodhclient>=0.7.0 # Apache-2.0
 gnocchiclient>=2.7.0 # Apache-2.0
 python-barbicanclient>=4.0.0 # Apache-2.0
@@ -10,7 +10,7 @@ python-designateclient>=1.5.0 # Apache-2.0
 python-heatclient>=1.6.1 # Apache-2.0
 python-ironicclient>=1.11.0 # Apache-2.0
 python-ironic-inspector-client>=1.5.0 # Apache-2.0
-python-mistralclient>=2.0.0 # Apache-2.0
+python-mistralclient>=3.1.0 # Apache-2.0
 python-muranoclient>=0.8.2 # Apache-2.0
 python-neutronclient>=5.1.0 # Apache-2.0
 python-saharaclient>=1.1.0 # Apache-2.0
