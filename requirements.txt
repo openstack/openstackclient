@@ -4,7 +4,7 @@
 pbr!=2.1.0,>=2.0.0 # Apache-2.0
 aodhclient>=0.7.0 # Apache-2.0
 gnocchiclient>=2.7.0 # Apache-2.0
-python-barbicanclient>=4.0.0 # Apache-2.0
+python-barbicanclient!=4.5.0,!=4.5.1,>=4.0.0 # Apache-2.0
 python-congressclient<2000,>=1.3.0 # Apache-2.0
 python-designateclient>=1.5.0 # Apache-2.0
 python-heatclient>=1.6.1 # Apache-2.0
@@ -18,6 +18,6 @@ python-saharaclient>=1.1.0 # Apache-2.0
 python-searchlightclient>=1.0.0 #Apache-2.0
 python-senlinclient>=1.1.0 # Apache-2.0
 python-troveclient>=2.2.0 # Apache-2.0
-python-vitrageclient>=1.1.0 # Apache-2.0
+python-vitrageclient>=1.3.0 # Apache-2.0
 python-watcherclient>=0.23.0 # Apache-2.0
 python-zaqarclient>=1.0.0 # Apache-2.0
