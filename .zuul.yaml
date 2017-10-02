@@ -1,0 +1,43 @@
+# from o-z-j/zuul.d/zuul-legacy-jobs.yaml
+- job:
+    name: openstackclient-check-plugins
+    parent: unittests
+    run: playbooks/openstackclient-check-plugins/run
+    timeout: 1800
+    required-projects:
+      - openstack/openstackclient
+      - openstack/python-openstackclient
+      - openstack/python-barbicanclient
+      - openstack/python-cloudkittyclient
+      - openstack/python-congressclient
+      - openstack/python-designateclient
+      - openstack/python-heatclient
+      - openstack/python-ironic-inspector-client
+      - openstack/python-ironicclient
+      - openstack/python-karborclient
+      - openstack/python-mistralclient
+      - openstack/python-muranoclient
+      - openstack/python-neutronclient
+      - openstack/python-octaviaclient
+      - openstack/python-pankoclient
+      - openstack/python-rsdclient
+      - openstack/python-saharaclient
+      - openstack/python-searchlightclient
+      - openstack/python-senlinclient
+      - openstack/python-tripleoclient
+      - openstack/python-troveclient
+      - openstack/python-vitrageclient
+      - openstack/python-watcherclient
+      - openstack/python-zaqarclient
+
+- project-template:
+    name: openstackclient-plugin-jobs
+    check:
+      jobs:
+        - openstackclient-check-plugins:
+            voting: false
+
+- project:
+    name: openstack/openstackclient
+    templates:
+      - openstackclient-plugin-jobs

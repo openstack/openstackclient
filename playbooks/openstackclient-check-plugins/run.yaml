@@ -1,0 +1,20 @@
+- hosts: all
+  name: Run openstackclient plugin check
+  tasks:
+
+    - shell:
+        cmd: |
+          virtualenv osc_plugins
+
+    - shell:
+        cmd: |
+          osc_plugins/bin/pip install -e src/git.openstack.org/{{ item }}
+      with_items: "{{ zuul.projects | selectattr('required') | map(attribute='name') | list }}"
+
+    - shell:
+        cmd: |
+          osc_plugins/bin/pip freeze
+          # Finally install the change under test
+          osc_plugins/bin/pip install -e src/{{ zuul.project.canonical_name }}
+          osc_plugins/bin/openstack --version
+          osc_plugins/bin/python src/{{ zuul.project.canonical_name }}/tests/check_osc_commands.py
