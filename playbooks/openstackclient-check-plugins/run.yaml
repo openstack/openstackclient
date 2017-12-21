@@ -10,8 +10,9 @@
     - shell:
         cmd: |
           echo "------------------------------------------------------------"
-          osc_plugins/bin/pip install -e src/git.openstack.org/{{ item }}
-      with_items: "{{ zuul.projects | selectattr('required') | map(attribute='name') | list }}"
+          osc_plugins/bin/pip install -e src/{{ item.key }}
+      when: item.value.required
+      with_dict: "{{ zuul.projects }}"
 
     - shell:
         cmd: |
