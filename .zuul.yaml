@@ -38,6 +38,5 @@
             voting: false
 
 - project:
-    name: openstack/openstackclient
     templates:
       - openstackclient-plugin-jobs
