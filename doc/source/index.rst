@@ -27,6 +27,6 @@ Developers may also be found in the `IRC channel`_ ``#openstack-sdks``.
 .. _Gerrit: http://docs.openstack.org/infra/manual/developers.html#development-workflow
 .. _Bug reports: https://bugs.launchpad.net/python-openstackclient/+bugs
 .. _blueprints: https://blueprints.launchpad.net/python-openstackclient
-.. _PyPi: https://pypi.python.org/pypi/openstackclient
+.. _PyPi: https://pypi.org/project/openstackclient
 .. _tarball: http://tarballs.openstack.org/openstackclient
 .. _IRC channel: https://wiki.openstack.org/wiki/IRC
