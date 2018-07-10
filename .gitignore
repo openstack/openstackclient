@@ -22,8 +22,7 @@ pip-log.txt
 .coverage
 cover
 .tox
-nosetests.xml
-.testrepository
+.stestr/
 
 # Developer
 .project
