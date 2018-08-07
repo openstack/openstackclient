@@ -6,18 +6,14 @@
         cmd: |
           echo "------------------------------------------------------------"
           virtualenv osc_plugins
-
-    - shell:
-        cmd: |
+          osc_plugins/bin/pip install -e ../pbrx
           echo "------------------------------------------------------------"
-          osc_plugins/bin/pip install -e src/{{ item.key }}
-      when: item.value.required
-      with_dict: "{{ zuul.projects }}"
-
-    - shell:
-        cmd: |
+          osc_plugins/bin/pip install -c ../requirements/upper-constraints.txt -r requirements.txt
           echo "------------------------------------------------------------"
-          osc_plugins/bin/pip freeze
+          osc_plugins/bin/pbrx install-siblings -c ../requirements/upper-constraints.txt $(find ../.. -mindepth 2 -maxdepth 2)
+          echo "------------------------------------------------------------"
+          osc_plugins/bin/pbr freeze
           echo "------------------------------------------------------------"
           osc_plugins/bin/openstack --version
-          osc_plugins/bin/python src/git.openstack.org/openstack/openstackclient/tests/check_osc_commands.py
+          osc_plugins/bin/python tests/check_osc_commands.py
+        chdir: /home/zuul/src/git.openstack.org/openstack/openstackclient
