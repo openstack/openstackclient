@@ -21,6 +21,7 @@
       - openstack/python-neutronclient
       - openstack/python-octaviaclient
       - openstack/python-pankoclient
+      - openstack/python-qinlingclient
       - openstack/python-rsdclient
       - openstack/python-saharaclient
       - openstack/python-searchlightclient
