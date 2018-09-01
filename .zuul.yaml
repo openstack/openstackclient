@@ -46,3 +46,4 @@
       - check-requirements
       - openstack-python-jobs
       - openstack-python35-jobs
+      - openstack-python36-jobs
