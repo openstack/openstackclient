@@ -6,7 +6,7 @@
     timeout: 1800
     required-projects:
       - openstack/openstackclient
-      - openstack/pbrx
+      - x/pbrx
       - openstack/python-openstackclient
       - openstack/python-barbicanclient
       - openstack/python-cloudkittyclient
@@ -22,7 +22,7 @@
       - openstack/python-octaviaclient
       - openstack/python-pankoclient
       - openstack/python-qinlingclient
-      - openstack/python-rsdclient
+      - x/python-rsdclient
       - openstack/python-saharaclient
       - openstack/python-searchlightclient
       - openstack/python-senlinclient

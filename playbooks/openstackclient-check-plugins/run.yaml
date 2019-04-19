@@ -16,4 +16,4 @@
           echo "------------------------------------------------------------"
           osc_plugins/bin/openstack --version
           osc_plugins/bin/python tests/check_osc_commands.py
-        chdir: /home/zuul/src/git.openstack.org/openstack/openstackclient
+        chdir: /home/zuul/src/opendev.org/openstack/openstackclient
