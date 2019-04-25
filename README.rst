@@ -34,7 +34,7 @@ language to describe operations in OpenStack.
 .. _Launchpad project: https://launchpad.net/python-openstackclient
 .. _Blueprints: https://blueprints.launchpad.net/python-openstackclient
 .. _Bugs: https://bugs.launchpad.net/python-openstackclient
-.. _Source: https://git.openstack.org/cgit/openstack/openstackclient
+.. _Source: https://opendev.org/openstack/openstackclient
 .. _Developer: http://docs.openstack.org/project-team-guide/project-setup/python.html
 .. _Contributing: http://docs.openstack.org/infra/manual/developers.html
 .. _Testing: http://docs.openstack.org/developer/python-openstackclient/developing.html#testing
