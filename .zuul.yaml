@@ -43,6 +43,7 @@
 - project:
     templates:
       - openstackclient-plugin-jobs
+      - build-openstack-docs-pti
       - check-requirements
       - openstack-python-jobs
       - openstack-python35-jobs
