@@ -131,7 +131,7 @@ def _check_command_overlap(valid_cmds):
     namespace.
     """
     overlap_cmds = {}
-    for ep_name, ep_mods in valid_cmds.items():
+    for ep_name, ep_mods in valid_cmds.iteritems():
         # Skip openstack.cli.base client entry points
         for ep_mod in ep_mods:
             for ep_name_search in valid_cmds.keys():
