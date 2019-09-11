@@ -11,11 +11,14 @@ OpenStackClient
     :alt: Downloads
 
 OpenStackClient (aka OSC) is a command-line client for OpenStack that brings
-the command set for Compute, Identity, Image, Object Store and Block Storage
-APIs together in a single shell with a uniform command structure.
+the command set for Compute, Identity, Image, Network, Object Store and Block
+Storage APIs together in a single shell with a uniform command structure.
 
-The primary goal is to provide a unified shell command structure and a common
-language to describe operations in OpenStack.
+The ``openstackclient`` package is a metapackage that installs
+``python-openstackclient`` and a number of optional plugins all at the same
+time to simplify the installation of OSC.  The major version of
+``openstackclient`` will always correspond to the major version of
+``python-openstackclient`` that will be installed.
 
 * `PyPi`_ - package installation
 * `Online Documentation`_
@@ -33,7 +36,7 @@ language to describe operations in OpenStack.
 .. _Online Documentation: http://docs.openstack.org/developer/python-openstackclient/
 .. _Launchpad project: https://launchpad.net/python-openstackclient
 .. _Blueprints: https://blueprints.launchpad.net/python-openstackclient
-.. _Bugs: https://bugs.launchpad.net/python-openstackclient
+.. _Bugs: https://storyboard.openstack.org/#!/project/975
 .. _Source: https://opendev.org/openstack/openstackclient
 .. _Developer: http://docs.openstack.org/project-team-guide/project-setup/python.html
 .. _Contributing: http://docs.openstack.org/infra/manual/developers.html

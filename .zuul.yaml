@@ -31,6 +31,7 @@
       - openstack/python-vitrageclient
       - openstack/python-watcherclient
       - openstack/python-zaqarclient
+      - openstack/python-zunclient
       - openstack/requirements
 
 - project-template:
