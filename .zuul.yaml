@@ -1,10 +1,9 @@
 # from o-z-j/zuul.d/zuul-legacy-jobs.yaml
 - job:
     name: openstackclient-check-plugins
-    parent: openstack-tox
+    parent: unittests
+    run: playbooks/openstackclient-check-plugins/run.yaml
     timeout: 1800
-    vars:
-      tox_envlist: osc_plugins
     required-projects:
       - openstack/openstackclient
       - x/pbrx

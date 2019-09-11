@@ -18,7 +18,6 @@ plugins with the purpose of detecting duplicate commands.
 """
 
 import pkg_resources
-import pprint
 import traceback
 
 
@@ -97,29 +96,26 @@ def find_duplicates():
 
     if duplicate_cmds:
         print("Duplicate commands found...")
-        pprint.pprint(duplicate_cmds)
+        print(duplicate_cmds)
         return True
     if failed_cmds:
         print("Some commands failed to load...")
-        pprint.pprint(failed_cmds)
+        print(failed_cmds)
         return True
 
     overlap_cmds = _check_command_overlap(valid_cmds)
-
-    print("Final set of commands...")
-    pprint.pprint(valid_cmds)
-
     if overlap_cmds:
         print("WARNING: Some commands overlap...")
-        pprint.pprint(overlap_cmds)
+        print(overlap_cmds)
         # FIXME(stevemar): when we determine why commands are overlapping
-        # we can uncomment the line below. We return False until then.
+        # we can uncomment the line below.
         # return True
-        return False
-    else:
-        # Safely return False here with the full set of commands
-        print("Found no duplicate or overlapping commands, OK to merge!")
-        return False
+
+    # Safely return False here with the full set of commands
+    print("Final set of commands...")
+    print(valid_cmds)
+    print("Found no duplicate or overlapping commands, OK to merge!")
+    return False
 
 
 def _check_command_overlap(valid_cmds):

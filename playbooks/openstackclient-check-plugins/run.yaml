@@ -1,0 +1,19 @@
+- hosts: all
+  name: Run openstackclient plugin check
+  tasks:
+
+    - shell:
+        cmd: |
+          echo "------------------------------------------------------------"
+          virtualenv osc_plugins
+          osc_plugins/bin/pip install -e ../../x/pbrx
+          echo "------------------------------------------------------------"
+          osc_plugins/bin/pip install -c ../requirements/upper-constraints.txt -r requirements.txt
+          echo "------------------------------------------------------------"
+          osc_plugins/bin/pbrx install-siblings -c ../requirements/upper-constraints.txt $(find ../.. -mindepth 2 -maxdepth 2)
+          echo "------------------------------------------------------------"
+          osc_plugins/bin/pbr freeze
+          echo "------------------------------------------------------------"
+          osc_plugins/bin/openstack --version
+          osc_plugins/bin/python tests/check_osc_commands.py
+        chdir: /home/zuul/src/opendev.org/openstack/openstackclient
