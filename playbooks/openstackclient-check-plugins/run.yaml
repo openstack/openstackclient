@@ -5,7 +5,7 @@
     - shell:
         cmd: |
           echo "------------------------------------------------------------"
-          virtualenv osc_plugins
+          virtualenv -p $(which python3) osc_plugins
           osc_plugins/bin/pip install -e ../../x/pbrx
           echo "------------------------------------------------------------"
           osc_plugins/bin/pip install -c ../requirements/upper-constraints.txt -r requirements.txt
