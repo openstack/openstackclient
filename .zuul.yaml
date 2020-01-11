@@ -33,6 +33,7 @@
       - openstack/python-zaqarclient
       - openstack/python-zunclient
       - openstack/requirements
+    branches: ^(?!stable)
 
 - project-template:
     name: openstackclient-plugin-jobs
