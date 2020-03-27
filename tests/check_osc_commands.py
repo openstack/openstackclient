@@ -169,7 +169,7 @@ def _is_valid_command(ep_name, ep_module_name, valid_cmds):
             if (module_parts[0] == valid_module_parts[0] and
                     module_parts[1] == valid_module_parts[1] and
                     module_parts[3] == valid_module_parts[3]):
-                    return True
+                return True
     return False
 
 
