@@ -9,7 +9,6 @@
       - openstack/python-openstackclient
       - openstack/python-barbicanclient
       - openstack/python-cloudkittyclient
-      - openstack/python-congressclient
       - openstack/python-designateclient
       - openstack/python-heatclient
       - openstack/python-ironic-inspector-client
