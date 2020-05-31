@@ -27,8 +27,9 @@ extensions = [
               ]
 
 # openstackdocstheme options
-repository_name = 'openstack/openstackclient'
-use_storyboard = True
+openstackdocs_repo_name = 'openstack/openstackclient'
+openstackdocs_auto_name = False
+openstackdocs_use_storyboard = True
 html_theme = 'openstackdocs'
 
 # Add any paths that contain templates here, relative to this directory.
@@ -77,7 +78,7 @@ exclude_patterns = ['**tests**']
 #show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = 'native'
 
 # A list of ignored prefixes for module index sorting.
 modindex_common_prefix = ['openstackclient.']
