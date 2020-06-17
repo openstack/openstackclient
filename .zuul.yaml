@@ -2,6 +2,7 @@
 - job:
     name: openstackclient-check-plugins
     parent: unittests
+    pre-run: playbooks/pre.yaml
     run: playbooks/openstackclient-check-plugins/run.yaml
     timeout: 1800
     required-projects:
