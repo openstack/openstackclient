@@ -14,7 +14,6 @@
       - openstack/python-heatclient
       - openstack/python-ironic-inspector-client
       - openstack/python-ironicclient
-      - openstack/python-karborclient
       - openstack/python-mistralclient
       - openstack/python-muranoclient
       - openstack/python-neutronclient
