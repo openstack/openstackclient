@@ -26,10 +26,11 @@
     - name: Install repos that are in requirements.txt
       shell:
         cmd: |
-           grep item.short_name requirements.txt
-           if [ $? -eq 0 ] ; then
-             osc_plugins/bin/pip install -c upper-constraints.txt -e {{ ansible_user_dir }}/{{ item.src_dir }}
-           fi
+          echo "------------------------------------------------------------"
+          grep {{ item.short_name }} requirements.txt
+          if [ $? -eq 0 ] ; then
+            osc_plugins/bin/pip install -c upper-constraints.txt -e {{ ansible_user_dir }}/{{ item.src_dir }}
+          fi
       args:
         chdir: /home/zuul/src/opendev.org/openstack/openstackclient
       with_items: "{{ zuul.projects.values() | list }}"
