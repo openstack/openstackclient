@@ -29,7 +29,7 @@ time to simplify the installation of OSC.  The major version of
 * `Developer` - getting started as a developer
 * `Contributing` - contributing code
 * `Testing` - testing code
-* IRC: #openstack-sdks on Freenode (irc.freenode.net)
+* IRC: #openstack-sdks on OFTC (irc.oftc.net)
 * License: Apache 2.0
 
 .. _PyPi: https://pypi.org/project/openstackclient
