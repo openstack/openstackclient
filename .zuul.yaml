@@ -8,12 +8,15 @@
     required-projects:
       - openstack/openstackclient
       - openstack/python-openstackclient
+      - openstack/python-aodhclient
       - openstack/python-barbicanclient
       - openstack/python-cloudkittyclient
       - openstack/python-designateclient
       - openstack/python-heatclient
       - openstack/python-ironic-inspector-client
       - openstack/python-ironicclient
+      - openstack/python-magnumclient
+      - openstack/python-manilaclient
       - openstack/python-mistralclient
       - openstack/python-neutronclient
       - openstack/python-octaviaclient
