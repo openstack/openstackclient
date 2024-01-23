@@ -25,6 +25,7 @@
       - openstack/python-watcherclient
       - openstack/python-zaqarclient
       - openstack/python-zunclient
+      - openstack/osc-placement
       - openstack/requirements
     branches:
       regex: ^stable/.*$
