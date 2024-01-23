@@ -18,7 +18,6 @@
       - openstack/python-muranoclient
       - openstack/python-neutronclient
       - openstack/python-octaviaclient
-      - openstack/python-pankoclient
       - x/python-rsdclient
       - openstack/python-saharaclient
       - openstack/python-senlinclient
