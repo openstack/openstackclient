@@ -13,42 +13,45 @@
 # under the License.
 
 """
-This module will use `pkg_resources` to scan commands for all OpenStackClient
-plugins with the purpose of detecting duplicate commands.
+This module will use `importlib.metadata` to scan commands for all OSC plugins
+with the purpose of detecting duplicate commands.
 """
 
-import pkg_resources
+import importlib.metadata
 import traceback
 
 
 def find_duplicates():
     """Find duplicates commands.
 
-    Here we use `pkg_resources` to find all modules. There will be many modules
-    on a system, so we filter them out based on "openstack" since that is the
-    prefix that OpenStackClient plugins will have.
+    Here we use `importlib.metadata` to find all modules. There will be many
+    modules on a system, so we filter them out based on "openstack" since that
+    is the prefix that OpenStackClient plugins will have.
 
     Each module has various entry points, each OpenStackClient command will
     have an entrypoint. Each entry point has a short name (ep.name) which
-    is the command the user types, as well as a long name (ep.module_name)
+    is the command the user types, as well as a group (ep.module_name)
     which indicates from which module the entry point is from.
 
-    For example, the entry point and module for v3 user list is::
+    For example, the module and entry point for v3 user list is::
 
-        module => openstackclient.identity.v3
+        module => openstackclient.identity.v3.user
         ep.name => user_list
-        ep.module_name =>  openstackclient.identity.v3.user
+        ep.group => openstackclient.identity.v3
 
     We keep a running tally of valid commands, duplicate commands and commands
     that failed to load.
 
     The resultant data structure for valid commands should look like::
 
-        {'user_list':
-            ['openstackclient.identity.v3.user',
-             'openstackclient.identity.v2.0.user']
-         'flavor_list':
-            [openstackclient.compute.v2.flavor']
+        {
+            'user_list': [
+                'openstackclient.identity.v3',
+                'openstackclient.identity.v2',
+            ],
+            'flavor_list': [
+                openstackclient.compute.v2',
+            ],
         }
 
     The same can be said for the duplicate and failed commands.
@@ -59,44 +62,42 @@ def find_duplicates():
     failed_cmds = {}
 
     # find all modules on the system
-    modules = set()
-    for dist in pkg_resources.working_set:
-        entry_map = pkg_resources.get_entry_map(dist)
-        modules.update(set(entry_map.keys()))
-
-    for module in modules:
-        # OpenStackClient plugins are prefixed with "openstack", skip otherwise
-        if not module.startswith('openstack'):
-            continue
-
-        # Iterate over all entry points
-        for ep in pkg_resources.iter_entry_points(module):
-            # Check for a colon, since valid entrypoints will have one, for
-            # example: quota_show = openstackclient.common.quota:ShowQuota
-            # and plugin entrypoints will not, for
-            # example: orchestration = heatclient.osc.plugin
-            if ':' not in str(ep):
+    for dist in importlib.metadata.distributions():
+        for ep in dist.entry_points:
+            # OpenStackClient plugins are prefixed with "openstack"
+            if not ep.group.startswith('openstack'):
                 continue
 
-            # cliff does a mapping between spaces and underscores
+            # Check for a colon since valid entrypoints will have one. For
+            # example:
+            #
+            #   quota_show = openstackclient.common.quota:ShowQuota
+            #
+            # Plugin entrypoints will not. For example:
+            #
+            #   orchestration = heatclient.osc.plugin
+            if ':' not in ep.value:
+                continue
+
             ep_name = ep.name.replace(' ', '_')
 
             try:
                 ep.load()
             except Exception:
                 exc_string = traceback.format_exc()
-                message = "{}\n{}".format(ep.module_name, exc_string)
+                message = "{}\n{}".format(ep.group, exc_string)
                 failed_cmds.setdefault(ep_name, []).append(message)
 
-            if _is_valid_command(ep_name, ep.module_name, valid_cmds):
-                valid_cmds.setdefault(ep_name, []).append(ep.module_name)
+            if _is_valid_command(ep_name, ep.group, valid_cmds):
+                valid_cmds.setdefault(ep_name, []).append(ep.group)
             else:
-                duplicate_cmds.setdefault(ep_name, []).append(ep.module_name)
+                duplicate_cmds.setdefault(ep_name, []).append(ep.group)
 
     if duplicate_cmds:
         print("Duplicate commands found...")
         print(duplicate_cmds)
         return True
+
     if failed_cmds:
         print("Some commands failed to load...")
         print(failed_cmds)
@@ -135,7 +136,7 @@ def _check_command_overlap(valid_cmds):
     return overlap_cmds
 
 
-def _is_valid_command(ep_name, ep_module_name, valid_cmds):
+def _is_valid_command(ep_name, ep_group, valid_cmds):
     """Determine if the entry point is valid.
 
     Aside from a simple check to see if the entry point short name is in our
@@ -162,13 +163,12 @@ def _is_valid_command(ep_name, ep_module_name, valid_cmds):
         return True
     else:
         # there already exists an entry in the dictionary for the command...
-        module_parts = ep_module_name.split(".")
+        module_parts = ep_group.split(".")
         for valid_module_name in valid_cmds[ep_name]:
             valid_module_parts = valid_module_name.split(".")
             if (
                 module_parts[0] == valid_module_parts[0]
                 and module_parts[1] == valid_module_parts[1]
-                and module_parts[3] == valid_module_parts[3]
             ):
                 return True
     return False
