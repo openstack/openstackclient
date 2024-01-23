@@ -221,8 +221,8 @@ htmlhelp_basename = 'OpenStackCommandLineClientdoc'
 #  dir menu entry, description, category)
 texinfo_documents = [
     ('index', 'OpenStackCommandLineClient',
-    u'OpenStack Command Line Client Documentation',
-    u'OpenStack', 'OpenStackCommandLineClient',
+     'OpenStack Command Line Client Documentation',
+     'OpenStack', 'OpenStackCommandLineClient',
      'One line description of project.',
      'Miscellaneous'),
 ]
