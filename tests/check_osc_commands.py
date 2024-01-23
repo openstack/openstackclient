@@ -71,7 +71,6 @@ def find_duplicates():
 
         # Iterate over all entry points
         for ep in pkg_resources.iter_entry_points(module):
-
             # Check for a colon, since valid entrypoints will have one, for
             # example: quota_show = openstackclient.common.quota:ShowQuota
             # and plugin entrypoints will not, for
@@ -166,9 +165,11 @@ def _is_valid_command(ep_name, ep_module_name, valid_cmds):
         module_parts = ep_module_name.split(".")
         for valid_module_name in valid_cmds[ep_name]:
             valid_module_parts = valid_module_name.split(".")
-            if (module_parts[0] == valid_module_parts[0] and
-                    module_parts[1] == valid_module_parts[1] and
-                    module_parts[3] == valid_module_parts[3]):
+            if (
+                module_parts[0] == valid_module_parts[0]
+                and module_parts[1] == valid_module_parts[1]
+                and module_parts[3] == valid_module_parts[3]
+            ):
                 return True
     return False
 

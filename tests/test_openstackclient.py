@@ -14,6 +14,5 @@ from oslotest import base
 
 
 class TestOpenstackClient(base.BaseTestCase):
-
     def test_something(self):
         pass
