@@ -26,7 +26,9 @@
       - openstack/python-zaqarclient
       - openstack/python-zunclient
       - openstack/requirements
-    branches: ^(?!stable)
+    branches:
+      regex: ^stable/.*$
+      negate: true
 
 - project-template:
     name: openstackclient-plugin-jobs
