@@ -20,7 +20,6 @@
       - openstack/python-octaviaclient
       - openstack/python-saharaclient
       - openstack/python-senlinclient
-      - openstack/python-tripleoclient
       - openstack/python-troveclient
       - openstack/python-vitrageclient
       - openstack/python-watcherclient
