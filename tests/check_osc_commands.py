@@ -99,7 +99,7 @@ def find_duplicates():
                 ep.load()
             except Exception:
                 exc_string = traceback.format_exc()
-                message = "{}\n{}".format(ep.group, exc_string)
+                message = f"{ep.group}\n{exc_string}"
                 failed_cmds.setdefault(ep_name, []).append(message)
 
             if _is_valid_command(ep_name, ep.group, valid_cmds):

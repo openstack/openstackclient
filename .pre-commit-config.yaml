@@ -1,30 +1,28 @@
 ---
-default_language_version:
-  # force all unspecified python hooks to run python3
-  python: python3
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: mixed-line-ending
         args: ['--fix', 'lf']
         exclude: '.*\.(svg)$'
-      - id: check-byte-order-marker
+      - id: fix-byte-order-marker
       - id: check-executables-have-shebangs
       - id: check-merge-conflict
       - id: debug-statements
       - id: check-yaml
         files: .*\.(yaml|yml)$
         args: ['--unsafe']
-  - repo: https://github.com/psf/black
-    rev: 23.12.1
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.8
     hooks:
-      - id: black
-        args: ['-S', '-l', '79']
+      - id: ruff-check
+        args: ['--fix', '--unsafe-fixes']
+      - id: ruff-format
   - repo: https://opendev.org/openstack/hacking
-    rev: 6.1.0
+    rev: 8.0.0
     hooks:
       - id: hacking
         additional_dependencies: []
-        exclude: '^(doc|releasenotes|tools)/.*$'
+        exclude: '^(doc|releasenotes)/.*$'
