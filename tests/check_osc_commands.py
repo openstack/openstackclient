@@ -20,6 +20,8 @@ with the purpose of detecting duplicate commands.
 import importlib.metadata
 import traceback
 
+from openstackclient import shell
+
 
 def find_duplicates():
     """Find duplicates commands.
@@ -60,6 +62,13 @@ def find_duplicates():
     valid_cmds = {}
     duplicate_cmds = {}
     failed_cmds = {}
+    ignored_cmds = {}
+
+    # TODO(stephenfin): We can remove this check once our minimum depends on
+    # a release including change I5dd9bc9743bea779ea1b4a71264c9a77c80033b3
+    ignored_modules: tuple[str] = ()
+    if hasattr(shell, 'IGNORED_MODULES'):
+        ignored_modules = shell.IGNORED_MODULES
 
     # find all modules on the system
     for dist in importlib.metadata.distributions():
@@ -80,6 +89,11 @@ def find_duplicates():
                 continue
 
             ep_name = ep.name.replace(' ', '_')
+
+            for ignored_module in ignored_modules:
+                if ep.value.startswith(ignored_module):
+                    ignored_cmds.setdefault(ep_name, []).append(ep.group)
+                    continue
 
             try:
                 ep.load()
@@ -114,6 +128,8 @@ def find_duplicates():
     # Safely return False here with the full set of commands
     print("Final set of commands...")
     print(valid_cmds)
+    print("Ignored commands...")
+    print(ignored_cmds)
     print("Found no duplicate or overlapping commands, OK to merge!")
     return False
 
