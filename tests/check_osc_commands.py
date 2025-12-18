@@ -90,10 +90,9 @@ def find_duplicates():
 
             ep_name = ep.name.replace(' ', '_')
 
-            for ignored_module in ignored_modules:
-                if ep.value.startswith(ignored_module):
-                    ignored_cmds.setdefault(ep_name, []).append(ep.group)
-                    continue
+            if any(ep.value.startswith(x) for x in ignored_modules):
+                ignored_cmds.setdefault(ep_name, []).append(ep.group)
+                continue
 
             try:
                 ep.load()
