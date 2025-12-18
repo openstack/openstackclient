@@ -20,6 +20,8 @@ with the purpose of detecting duplicate commands.
 import importlib.metadata
 import traceback
 
+import yaml
+
 from openstackclient import shell
 
 
@@ -107,28 +109,29 @@ def find_duplicates():
                 duplicate_cmds.setdefault(ep_name, []).append(ep.group)
 
     if duplicate_cmds:
-        print("Duplicate commands found...")
+        print("Duplicate commands found...\n")
         print(duplicate_cmds)
         return True
 
     if failed_cmds:
-        print("Some commands failed to load...")
+        print("Some commands failed to load...\n")
         print(failed_cmds)
         return True
 
     overlap_cmds = _check_command_overlap(valid_cmds)
     if overlap_cmds:
-        print("WARNING: Some commands overlap...")
-        print(overlap_cmds)
+        print("WARNING: Some commands overlap...\n")
+        print(yaml.dump(overlap_cmds))
+        print()
         # FIXME(stevemar): when we determine why commands are overlapping
         # we can uncomment the line below.
         # return True
 
     # Safely return False here with the full set of commands
-    print("Final set of commands...")
-    print(valid_cmds)
-    print("Ignored commands...")
-    print(ignored_cmds)
+    print("Final set of commands...\n")
+    print(yaml.dump(valid_cmds))
+    print("Ignored commands...\n")
+    print(yaml.dump(ignored_cmds))
     print("Found no duplicate or overlapping commands, OK to merge!")
     return False
 
