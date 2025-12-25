@@ -29,6 +29,13 @@
     branches:
       regex: ^stable/.*$
       negate: true
+    irrelevant-files:
+      - ^.*\.rst$
+      - ^doc/.*$
+      - ^releasenotes/.*$
+      - ^.*/tests/.*$
+      - ^test-requirements\.txt$
+      - ^\.pre-commit-config\.yaml$
 
 - project-template:
     name: openstackclient-plugin-jobs
