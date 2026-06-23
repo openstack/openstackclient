@@ -1,4 +1,6 @@
+---
 # from o-z-j/zuul.d/zuul-legacy-jobs.yaml
+
 - job:
     name: openstackclient-check-plugins
     parent: unittests
@@ -50,3 +52,4 @@
       - build-openstack-docs-pti
       - check-requirements
       - openstack-python3-jobs
+      - openstack-python3-next-jobs
