@@ -1,5 +1,5 @@
 [build-system]
-requires = ["pbr>=6.1.1"]
+requires = ["pbr>=7.1.0"]
 build-backend = "pbr.build"
 
 [project]
@@ -9,20 +9,18 @@ authors = [
     {name = "OpenStack", email = "openstack-discuss@lists.openstack.org"},
 ]
 readme = {file = "README.rst", content-type = "text/x-rst"}
-license = {text = "Apache-2.0"}
+license = "Apache-2.0"
 dynamic = ["version"]
 requires-python = ">=3.11"
 classifiers = [
-  "Environment :: OpenStack",
-  "Intended Audience :: Information Technology",
-  "Intended Audience :: System Administrators",
-  "License :: OSI Approved :: Apache Software License",
-  "Operating System :: POSIX :: Linux",
-  "Programming Language :: Python",
-  "Programming Language :: Python :: 3",
+    "Environment :: OpenStack",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
 ]
 dependencies = [
-    "pbr!=2.1.0,>=2.0.0", # Apache-2.0
     "networkx>=2.3", # BSD
     "aodhclient>=0.9.0", # Apache-2.0
     "gnocchiclient>=3.3.1", # Apache-2.0
