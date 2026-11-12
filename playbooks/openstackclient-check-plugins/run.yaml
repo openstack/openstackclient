@@ -2,13 +2,14 @@
   name: Run openstackclient plugin check
   tasks:
 
-    - name: Setup virtualenv, install openstackclient, get requirements
+    - name: Setup virtualenv, install dependencies, get constraints
       shell:
         cmd: |
+          set -e
           echo "------------------------------------------------------------"
-          virtualenv -p $(which python3) osc_plugins
+          {{ ensure_uv_executable }} venv --python $(which python3) osc_plugins
           echo "------------------------------------------------------------"
-          osc_plugins/bin/pip install -c ../requirements/upper-constraints.txt -r requirements.txt
+          {{ ensure_uv_executable }} pip install --python osc_plugins/bin/python -c ../requirements/upper-constraints.txt -r pyproject.toml --group test
           echo "------------------------------------------------------------"
           cp ../requirements/upper-constraints.txt .
         chdir: /home/zuul/src/opendev.org/openstack/openstackclient
@@ -23,13 +24,13 @@
         - item.name != "openstack/requirements"
         - item.name != "openstack/openstackclient"
 
-    - name: Install repos that are in requirements.txt
+    - name: Install repos that are dependencies
       shell:
         cmd: |
+          set -e
           echo "------------------------------------------------------------"
-          grep {{ item.short_name }} requirements.txt
-          if [ $? -eq 0 ] ; then
-            osc_plugins/bin/pip install -c upper-constraints.txt -e {{ ansible_user_dir }}/{{ item.src_dir }}
+          if grep -F '{{ item.short_name }}' pyproject.toml; then
+            {{ ensure_uv_executable }} pip install --python osc_plugins/bin/python -c upper-constraints.txt -e {{ ansible_user_dir }}/{{ item.src_dir }}
           fi
       args:
         chdir: /home/zuul/src/opendev.org/openstack/openstackclient
@@ -41,8 +42,9 @@
     - name: Run check_osc_commands
       shell:
         cmd: |
+          set -e
           echo "------------------------------------------------------------"
-          osc_plugins/bin/pbr freeze
+          {{ ensure_uv_executable }} pip freeze --python osc_plugins/bin/python
           echo "------------------------------------------------------------"
           osc_plugins/bin/openstack --version
           osc_plugins/bin/python tests/check_osc_commands.py
